@@ -1,0 +1,4 @@
+node_modules/
+survey_local.db
+*.log
+.DS_Store

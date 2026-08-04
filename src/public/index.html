@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIEC — Systems Integrators Educational Community | Survey Anonima</title>
+  <meta name="description" content="Partecipa alle survey anonime del progetto SIEC (sieconline.it) per la filiera AV Professionale.">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            siec: {
+              primary: '#002C5F',
+              accent: '#00A3E0',
+              bg: '#F8FAFC',
+              card: '#FFFFFF',
+              border: '#E2E8F0',
+              textPrimary: '#0F172A',
+              textSecondary: '#475569'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- SortableJS per Drag & Drop -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+  <!-- Custom Styles (SIEC Design System) -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-siec-bg text-siec-textPrimary min-h-screen flex flex-col justify-between selection:bg-siec-accent selection:text-white">
+
+  <!-- Header / Navigation Bar -->
+  <header class="bg-white border-b border-siec-border sticky top-0 z-50 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <a href="/" onclick="event.preventDefault(); navigateTo('/')" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-lg bg-siec-primary flex items-center justify-center font-black text-white text-xl shadow-md group-hover:bg-siec-accent transition-colors">
+          S
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-lg tracking-tight text-siec-primary">SIEC</span>
+            <span class="text-xs font-semibold text-slate-400 hidden sm:inline">— Systems Integrators Educational Community</span>
+          </div>
+          <span class="text-xs text-slate-500 block">sieconline.it</span>
+        </div>
+      </a>
+      
+      <div class="flex items-center gap-3">
+        <div class="siec-badge-anon px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm">
+          <span>🛡️</span>
+          <span>Survey Anonima SIEC</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress Bar sottile in alto -->
+  <div id="progress-container" class="w-full bg-slate-200 h-1 hidden sticky top-[65px] z-40">
+    <div id="progress-bar" class="progress-bar-accent h-1" style="width: 0%"></div>
+  </div>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-8 sm:py-10">
+
+    <!-- LANDING VIEW: Scelta Profilo -->
+    <section id="landing-view" class="space-y-8 step-fade-in">
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <span class="px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-siec-accent bg-sky-50 border border-sky-200 rounded-full">
+          Indagine di Mercato ufficiale
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-siec-primary tracking-tight leading-tight">
+          La tua opinione fa crescere la filiera <span class="text-siec-accent">AV Professionale</span>
+        </h1>
+        <p class="text-siec-textSecondary text-base leading-relaxed">
+          Seleziona il tuo profilo per iniziare la survey. Rispondi in totale anonimato: non sono richiesti nome, email né dati identificativi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+        <!-- Card 1: Vendor & Distributori -->
+        <div onclick="navigateTo('/vendor')" class="group siec-card p-8 cursor-pointer hover:border-siec-accent transition-all hover:shadow-md flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 text-siec-accent border border-sky-100 flex items-center justify-center text-2xl font-bold">
+              🔷
+            </div>
+            <div>
+              <h2 class="text-xl font-extrabold text-siec-primary group-hover:text-siec-accent transition-colors">Vendor & Distributori</h2>
+              <p class="text-siec-textSecondary text-sm mt-2 leading-relaxed">
+                Dedicato ai produttori e distributori del settore AV Professionale in Italia.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-siec-accent font-bold text-sm">
+            <span>Inizia Survey Vendor</span>
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Card 2: System Integrator -->
+        <div onclick="navigateTo('/system-integrator')" class="group siec-card p-8 cursor-pointer hover:border-siec-primary transition-all hover:shadow-md flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-slate-100 text-siec-primary border border-slate-200 flex items-center justify-center text-2xl font-bold">
+              🔶
+            </div>
+            <div>
+              <h2 class="text-xl font-extrabold text-siec-primary group-hover:text-siec-accent transition-colors">System Integrator</h2>
+              <p class="text-siec-textSecondary text-sm mt-2 leading-relaxed">
+                Dedicato alle aziende di system integration ed installazioni fisse.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-slate-100 text-siec-primary group-hover:text-siec-accent font-bold text-sm">
+            <span>Inizia Survey System Integrator</span>
+            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SURVEY WIZARD VIEW -->
+    <section id="survey-view" class="hidden space-y-6 step-fade-in">
+      <!-- Survey Header Card -->
+      <div class="siec-card p-6 sm:p-8 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <span id="step-indicator" class="text-xs font-bold uppercase tracking-wider text-siec-accent">Passo 1 di 3</span>
+            <h2 id="survey-title" class="text-2xl font-extrabold text-siec-primary mt-1">Caricamento...</h2>
+          </div>
+          <button onclick="navigateTo('/')" class="text-xs text-slate-500 hover:text-siec-primary underline self-start sm:self-auto font-medium">
+            &larr; Cambia Profilo
+          </button>
+        </div>
+
+        <p id="survey-intro" class="text-siec-textSecondary text-sm leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200">
+          ...
+        </p>
+      </div>
+
+      <!-- Banner Errore -->
+      <div id="step-error" class="hidden p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm font-bold flex items-center gap-3 shadow-sm">
+        <svg class="w-5 h-5 shrink-0 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span id="step-error-text">Completa i campi richiesti per proseguire.</span>
+      </div>
+
+      <!-- STEP 0: Segmentazione Fatturato (solo SI) -->
+      <div id="step-0-container" class="step-container hidden siec-card p-6 sm:p-8 space-y-6">
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase text-siec-accent tracking-wider">Sezione 0 — Segmentazione</span>
+          <h3 id="revenue-prompt" class="text-xl font-extrabold text-siec-primary">In quale fascia di fatturato annuo ti riconosci?</h3>
+        </div>
+        <div id="revenue-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <!-- Dinamico -->
+        </div>
+      </div>
+
+      <!-- STEP 1: Ranking Drag & Drop -->
+      <div id="step-1-container" class="step-container hidden siec-card p-6 sm:p-8 space-y-6">
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase text-siec-accent tracking-wider">Sezione 1 — Ranking Importanza</span>
+          <h3 class="text-xl font-extrabold text-siec-primary">Ordina i fattori dal più importante (1) al meno importante (8)</h3>
+          <p class="text-siec-textSecondary text-xs sm:text-sm">Trascina gli elementi per posizionarli nell'ordine di tua preferenza (1 = massima importanza).</p>
+        </div>
+
+        <div id="ranking-list" class="space-y-3">
+          <!-- Dinamico -->
+        </div>
+      </div>
+
+      <!-- STEP 2: Rating Grid (Likert 1-5) -->
+      <div id="step-2-container" class="step-container hidden siec-card p-6 sm:p-8 space-y-6">
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase text-siec-accent tracking-wider">Sezione 2 — Valutazione SIEC vs Alternative</span>
+          <h3 class="text-xl font-extrabold text-siec-primary">Valuta le soluzioni SIEC per ciascuno degli 8 fattori</h3>
+          <p class="text-siec-textSecondary text-xs sm:text-sm">Scala: 1 = Per nulla soddisfacente | 2 = Inadeguato | 3 = In linea | 4 = Molto buono | 5 = Eccellente</p>
+        </div>
+
+        <div id="rating-factors-grid" class="space-y-4">
+          <!-- Dinamico -->
+        </div>
+      </div>
+
+      <!-- STEP 3: Open Feedback -->
+      <div id="step-3-container" class="step-container hidden siec-card p-6 sm:p-8 space-y-6">
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase text-siec-accent tracking-wider">Sezione 3 — Feedback Aperto (Opzionale)</span>
+          <h3 id="open-feedback-prompt" class="text-xl font-extrabold text-siec-primary">C'è qualcosa che per te è importante e che non abbiamo incluso qui sopra?</h3>
+          <p class="text-siec-textSecondary text-xs sm:text-sm">Puoi lasciare eventuali note, suggerimenti o segnalazioni aggiuntive.</p>
+        </div>
+
+        <textarea id="open-feedback-input" rows="5" class="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 text-siec-textPrimary placeholder-slate-400 focus:border-siec-accent focus:ring-1 focus:ring-siec-accent outline-none text-sm transition-all" placeholder="Scrivi qui il tuo feedback..."></textarea>
+      </div>
+
+      <!-- Buttons Navigation Bar -->
+      <div class="flex items-center justify-between pt-4">
+        <button id="btn-prev" onclick="prevStep()" class="px-6 py-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-siec-textPrimary font-bold border border-slate-200 text-sm transition-all hidden">
+          &larr; Indietro
+        </button>
+
+        <div class="ml-auto flex items-center gap-3">
+          <button id="btn-next" onclick="nextStep()" class="btn-siec-primary px-8 py-3 text-sm shadow-md transition-all">
+            Prosegui &rarr;
+          </button>
+          
+          <button id="btn-submit" onclick="submitSurvey()" class="px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-md transition-all hidden">
+            Invia Risposta
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESS VIEW: Conferma -->
+    <section id="success-view" class="hidden siec-card max-w-xl mx-auto p-8 sm:p-12 text-center space-y-6 step-fade-in my-8">
+      <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-4xl shadow-md font-bold">
+        ✓
+      </div>
+      <div class="space-y-3">
+        <h2 class="text-3xl font-extrabold text-siec-primary tracking-tight">Grazie per il tuo tempo!</h2>
+        <p class="text-siec-textSecondary text-base leading-relaxed">
+          La tua risposta è stata registrata con successo in completo anonimato. Il tuo contributo aiuterà SIEC a migliorare i servizi per la filiera AV Professionale.
+        </p>
+      </div>
+    </section>
+
+    <!-- ADMIN DASHBOARD VIEW -->
+    <section id="admin-view" class="hidden space-y-8 step-fade-in">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 siec-card p-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-siec-accent">Pannello Amministrazione</span>
+          <h2 class="text-2xl font-extrabold text-siec-primary mt-1">Dashboard Risposte Survey</h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="loadAdminDashboard()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-siec-primary rounded-lg border border-slate-200 text-xs font-bold flex items-center gap-2">
+            <svg class="w-4 h-4 text-siec-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            Aggiorna
+          </button>
+          <a href="/api/survey/export-csv" download class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-extrabold text-xs flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Scarica CSV
+          </a>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="siec-card p-6 border-l-4 border-l-siec-primary space-y-1">
+          <span class="text-xs font-bold text-slate-500">Totale Risposte</span>
+          <div id="stat-total" class="text-3xl font-extrabold text-siec-primary">0</div>
+        </div>
+        <div class="siec-card p-6 border-l-4 border-l-siec-accent space-y-1">
+          <span class="text-xs font-bold text-slate-500">Vendor & Distributori</span>
+          <div id="stat-vendor" class="text-3xl font-extrabold text-siec-accent">0</div>
+        </div>
+        <div class="siec-card p-6 border-l-4 border-l-blue-600 space-y-1">
+          <span class="text-xs font-bold text-slate-500">System Integrator</span>
+          <div id="stat-si" class="text-3xl font-extrabold text-blue-600">0</div>
+        </div>
+      </div>
+
+      <!-- Segmentazione Fatturato SI -->
+      <div class="siec-card p-6 space-y-4">
+        <h3 class="text-lg font-extrabold text-siec-primary">Segmentazione Fatturato (System Integrator)</h3>
+        <div id="revenue-breakdown-badges" class="flex flex-wrap gap-3">
+          <!-- Dinamico -->
+        </div>
+      </div>
+
+      <!-- Tabella Risposte Recenti -->
+      <div class="siec-card p-6 space-y-4">
+        <h3 class="text-lg font-extrabold text-siec-primary">Elenco Risposte Registrate</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-siec-textPrimary">
+            <thead class="bg-slate-50 text-slate-500 uppercase font-bold text-[10px] tracking-wider border-b border-slate-200">
+              <tr>
+                <th class="p-3">Data UTC</th>
+                <th class="p-3">Tipo Survey</th>
+                <th class="p-3">Fatturato</th>
+                <th class="p-3">Open Feedback</th>
+                <th class="p-3 text-right">Dettagli</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body" class="divide-y divide-slate-100">
+              <!-- Dinamico -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-siec-border bg-white py-6 text-center text-xs text-siec-textSecondary">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="font-medium">© SIEC — Systems Integrators Educational Community | <a href="https://sieconline.it" target="_blank" class="text-siec-accent font-bold hover:underline">sieconline.it</a></p>
+      <p class="text-slate-400">🛡️ Nessun IP né dato personale registrato</p>
+    </div>
+  </footer>
+
+  <!-- Modal Dettaglio Risposta -->
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="siec-card max-w-2xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <h3 class="text-xl font-extrabold text-siec-primary">Dettaglio Risposta Survey</h3>
+        <button onclick="closeDetailModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-siec-primary flex items-center justify-center font-bold text-sm">✕</button>
+      </div>
+      <div id="modal-content" class="space-y-4 text-sm text-siec-textPrimary">
+        <!-- Dinamico -->
+      </div>
+      <div class="pt-4 border-t border-slate-100 text-right">
+        <button onclick="closeDetailModal()" class="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-siec-primary rounded-lg font-bold text-xs transition-all">
+          Chiudi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client Script -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

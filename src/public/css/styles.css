@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --siec-primary: #002C5F;
+  --siec-accent: #00A3E0;
+  --siec-bg-page: #F8FAFC;
+  --siec-bg-card: #FFFFFF;
+  --siec-border: #E2E8F0;
+  --siec-text-primary: #0F172A;
+  --siec-text-secondary: #475569;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--siec-bg-page);
+  color: var(--siec-text-primary);
+  min-height: 100vh;
+}
+
+/* SIEC Clean Card */
+.siec-card {
+  background-color: var(--siec-bg-card);
+  border: 1px solid var(--siec-border);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  border-radius: 1rem;
+}
+
+/* Header Badge */
+.siec-badge-anon {
+  background-color: #E0F2FE;
+  color: #0369A1;
+  border: 1px solid #BAE6FD;
+}
+
+/* SortableJS Items */
+.sortable-item {
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  transition: all 0.15s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.sortable-item:hover {
+  border-color: var(--siec-accent);
+}
+
+.sortable-ghost {
+  opacity: 0.4;
+  background-color: #F0F9FF !important;
+  border: 2px dashed var(--siec-accent) !important;
+}
+
+.sortable-chosen {
+  background-color: #F0F9FF;
+  box-shadow: 0 4px 12px rgba(0, 163, 224, 0.15);
+}
+
+.sortable-drag {
+  opacity: 1 !important;
+  border-color: var(--siec-accent) !important;
+  background-color: #F0F9FF !important;
+  box-shadow: 0 10px 25px rgba(0, 44, 95, 0.15);
+  transform: scale(1.01);
+}
+
+/* Circular Position Badge (1-8) */
+.position-badge {
+  background-color: var(--siec-primary);
+  color: #ffffff;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 44, 95, 0.2);
+}
+
+/* Likert Rating Badge Buttons */
+.rating-btn {
+  transition: all 0.2s ease;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  color: var(--siec-text-primary);
+}
+
+.rating-btn:hover {
+  border-color: var(--siec-accent);
+  color: var(--siec-accent);
+}
+
+.rating-btn.active {
+  background-color: var(--siec-primary) !important;
+  color: #ffffff !important;
+  border-color: var(--siec-primary) !important;
+  box-shadow: 0 4px 12px rgba(0, 44, 95, 0.2);
+}
+
+/* Primary Button */
+.btn-siec-primary {
+  background-color: var(--siec-primary);
+  color: #ffffff;
+  border-radius: 0.5rem; /* 8px */
+  font-weight: 700;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-siec-primary:hover {
+  background-color: var(--siec-accent);
+}
+
+/* Progress Bar */
+.progress-bar-accent {
+  background-color: var(--siec-accent);
+  transition: width 0.4s ease;
+}
+
+/* Fade in animation */
+.step-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

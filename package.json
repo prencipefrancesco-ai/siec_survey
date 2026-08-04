@@ -1,0 +1,19 @@
+{
+  "name": "siec-survey-app",
+  "version": "1.0.0",
+  "description": "Web App per le survey anonime SIEC (sieconline.it)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node test/api.test.js"
+  },
+  "keywords": ["siec", "survey", "express", "postgresql"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pg": "^8.11.5",
+    "sqlite3": "^5.1.7"
+  }
+}
