@@ -108,6 +108,12 @@ async function loadAdminDashboard() {
       });
     }
 
+    // Render Visuale Totale System Integrator
+    renderAggregateView('si-aggregate-container', json.siFactors, 'si');
+
+    // Render Visuale Totale Vendor & Distributori
+    renderAggregateView('vendor-aggregate-container', json.vendorFactors, 'vendor');
+
     // Tabella risposte
     const tbody = document.getElementById('admin-table-body');
     tbody.innerHTML = '';
@@ -124,14 +130,14 @@ async function loadAdminDashboard() {
       const dateStr = new Date(r.created_at).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'medium' });
 
       const tr = document.createElement('tr');
-      tr.className = 'hover:bg-slate-800/40 transition-colors';
+      tr.className = 'hover:bg-slate-50/60 transition-colors';
       tr.innerHTML = `
-        <td class="p-3 font-mono text-slate-400 text-[11px]">${dateStr}</td>
-        <td class="p-3 font-semibold ${r.survey_type === 'vendor_distributori' ? 'text-sky-300' : 'text-blue-300'}">${typeLabel}</td>
-        <td class="p-3 text-slate-300 font-medium">${r.revenue_range || 'N/D'}</td>
-        <td class="p-3 text-slate-400 italic max-w-xs truncate">${escapeHtml(r.open_feedback || '-') || '-'}</td>
+        <td class="p-3 font-mono text-slate-500 text-[11px]">${dateStr}</td>
+        <td class="p-3 font-semibold ${r.survey_type === 'vendor_distributori' ? 'text-sky-600' : 'text-amber-600'}">${typeLabel}</td>
+        <td class="p-3 text-slate-700 font-medium">${r.revenue_range || 'N/D'}</td>
+        <td class="p-3 text-slate-500 italic max-w-xs truncate">${escapeHtml(r.open_feedback || '-') || '-'}</td>
         <td class="p-3 text-right">
-          <button onclick="showResponseDetails(${index})" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-sky-400 font-semibold rounded-lg border border-slate-700 text-[11px]">
+          <button onclick="showResponseDetails(${index})" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-siec-primary font-semibold rounded-lg border border-slate-200 text-[11px]">
             Vedi Dettaglio
           </button>
         </td>
@@ -141,6 +147,86 @@ async function loadAdminDashboard() {
   } catch (err) {
     console.error('Errore caricamento admin dashboard:', err);
   }
+}
+
+function renderAggregateView(containerId, factors, categoryType) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  if (!factors || factors.length === 0) {
+    container.innerHTML = '<div class="p-4 text-center text-slate-400 text-xs italic bg-slate-50 rounded-xl border border-slate-100">Nessuna risposta registrata per questa categoria.</div>';
+    return;
+  }
+
+  // Ordina i fattori per rank medio crescente (#1 prima) se disponibile
+  const sortedFactors = [...factors].sort((a, b) => {
+    if (a.avgRank !== null && b.avgRank !== null) return a.avgRank - b.avgRank;
+    if (a.avgRank !== null) return -1;
+    if (b.avgRank !== null) return 1;
+    return 0;
+  });
+
+  const isSi = categoryType === 'si';
+  const badgeBg = isSi ? 'bg-amber-500/10 text-amber-700 border-amber-500/20' : 'bg-sky-500/10 text-sky-700 border-sky-500/20';
+  const progressBg = isSi ? 'bg-amber-500' : 'bg-sky-500';
+
+  let html = `
+    <div class="overflow-x-auto rounded-xl border border-slate-200">
+      <table class="w-full text-left text-xs text-slate-700">
+        <thead class="bg-slate-50 text-slate-500 uppercase font-bold text-[10px] tracking-wider border-b border-slate-200">
+          <tr>
+            <th class="p-3 w-12 text-center">Pos.</th>
+            <th class="p-3">Fattore & Descrizione</th>
+            <th class="p-3 w-36 text-center">Rank Medio (1=max, 8=min)</th>
+            <th class="p-3 w-52">Valutazione Media (1-5)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 bg-white">
+  `;
+
+  sortedFactors.forEach((f, idx) => {
+    const rankDisplay = f.avgRank !== null ? `#${f.avgRank.toFixed(1)}` : 'N/D';
+    const rateDisplay = f.avgRate !== null ? `${f.avgRate.toFixed(1)} / 5.0` : 'N/D';
+    const ratePct = f.avgRate !== null ? Math.round((f.avgRate / 5) * 100) : 0;
+
+    let rateBadgeColor = 'bg-slate-100 text-slate-600';
+    if (f.avgRate >= 4.0) rateBadgeColor = 'bg-emerald-100 text-emerald-800 font-bold';
+    else if (f.avgRate >= 3.0) rateBadgeColor = 'bg-blue-100 text-blue-800 font-bold';
+    else if (f.avgRate >= 2.0) rateBadgeColor = 'bg-amber-100 text-amber-800 font-bold';
+    else if (f.avgRate !== null) rateBadgeColor = 'bg-red-100 text-red-800 font-bold';
+
+    html += `
+      <tr class="hover:bg-slate-50/80 transition-colors">
+        <td class="p-3 text-center font-bold text-slate-400 text-sm">${idx + 1}</td>
+        <td class="p-3 space-y-0.5">
+          <div class="font-extrabold text-siec-primary text-xs sm:text-sm">${escapeHtml(f.title)}</div>
+          <div class="text-slate-500 text-[11px] leading-snug max-w-xl">${escapeHtml(f.extended || '')}</div>
+        </td>
+        <td class="p-3 text-center">
+          <span class="inline-block px-2.5 py-1 rounded-lg border font-mono font-extrabold text-xs ${badgeBg}">
+            ${rankDisplay}
+          </span>
+        </td>
+        <td class="p-3 space-y-1">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded text-[11px] ${rateBadgeColor}">${rateDisplay}</span>
+            <span class="text-[10px] text-slate-400 font-bold">${ratePct}%</span>
+          </div>
+          <div class="w-full bg-slate-150 h-2 rounded-full overflow-hidden bg-slate-100">
+            <div class="${progressBg} h-full transition-all duration-500 rounded-full" style="width: ${ratePct}%"></div>
+          </div>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  container.innerHTML = html;
 }
 
 function showResponseDetails(index) {

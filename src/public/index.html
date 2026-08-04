@@ -274,17 +274,56 @@
         </div>
       </div>
 
-      <!-- Segmentazione Fatturato SI -->
-      <div class="siec-card p-6 space-y-4">
-        <h3 class="text-lg font-extrabold text-siec-primary">Segmentazione Fatturato (System Integrator)</h3>
-        <div id="revenue-breakdown-badges" class="flex flex-wrap gap-3">
+      <!-- VISUALE TOTALE: SYSTEM INTEGRATOR -->
+      <div class="siec-card p-6 space-y-6 border-t-4 border-t-amber-500">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 border border-amber-500/20 text-xs font-bold">🔶 Survey 2</span>
+              <h3 class="text-xl font-extrabold text-siec-primary">Visuale Totale: System Integrator</h3>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Aggregato del ranking d'importanza e della valutazione media SIEC per la categoria System Integrator.</p>
+          </div>
+        </div>
+
+        <!-- Segmentazione Fatturato SI -->
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Distribuzione Fatturato Annuncio:</span>
+          <div id="revenue-breakdown-badges" class="flex flex-wrap gap-3">
+            <!-- Dinamico -->
+          </div>
+        </div>
+
+        <!-- Tabella Fattori Aggregati SI -->
+        <div id="si-aggregate-container">
+          <!-- Dinamico -->
+        </div>
+      </div>
+
+      <!-- VISUALE TOTALE: VENDOR & DISTRIBUTORI -->
+      <div class="siec-card p-6 space-y-6 border-t-4 border-t-sky-500">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-600 border border-sky-500/20 text-xs font-bold">🔷 Survey 1</span>
+              <h3 class="text-xl font-extrabold text-siec-primary">Visuale Totale: Vendor & Distributori</h3>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Aggregato del ranking d'importanza e della valutazione media SIEC per la categoria Vendor e Distributori.</p>
+          </div>
+        </div>
+
+        <!-- Tabella Fattori Aggregati Vendor -->
+        <div id="vendor-aggregate-container">
           <!-- Dinamico -->
         </div>
       </div>
 
       <!-- Tabella Risposte Recenti -->
       <div class="siec-card p-6 space-y-4">
-        <h3 class="text-lg font-extrabold text-siec-primary">Elenco Risposte Registrate</h3>
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-extrabold text-siec-primary">Elenco Risposte Registrate</h3>
+          <span class="text-xs text-slate-400">Dettaglio singolo invio</span>
+        </div>
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-siec-textPrimary">
             <thead class="bg-slate-50 text-slate-500 uppercase font-bold text-[10px] tracking-wider border-b border-slate-200">
