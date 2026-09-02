@@ -40,8 +40,8 @@
   <!-- Header / Navigation Bar -->
   <header class="bg-white border-b border-siec-border sticky top-0 z-50 shadow-sm">
     <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
-      <a href="/" onclick="event.preventDefault(); navigateTo('/')" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-lg bg-siec-primary flex items-center justify-center font-black text-white text-xl shadow-md group-hover:bg-siec-accent transition-colors">
+      <div class="flex items-center gap-3 group" id="header-logo">
+        <div class="w-10 h-10 rounded-lg bg-siec-primary flex items-center justify-center font-black text-white text-xl shadow-md transition-colors">
           S
         </div>
         <div>
@@ -51,7 +51,7 @@
           </div>
           <span class="text-xs text-slate-500 block">sieconline.it</span>
         </div>
-      </a>
+      </div>
       
       <div class="flex items-center gap-3">
         <div class="siec-badge-anon px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm">
