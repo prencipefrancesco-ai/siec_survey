@@ -11,7 +11,7 @@ Tutti i componenti UI della survey devono riflettere fedelmente il design system
    - Text Secondary: #475569 (Grigio medio)
 
 2. HEADER & LOGO INTEGRATION:
-   - Nell'header della Web App, inserire il logo SIEC (o la dicitura stilizzata SIEC — System Integrators Educational Community) con il claim ufficiale dell'associazione.
+   - Nell'header della Web App, inserire il logo SIEC (o la dicitura stilizzata SIEC — System Integration Experience Community) con il claim ufficiale dell'associazione.
    - Aggiungere una pillola/badge visibile nell'header: 
      [ 🛡️ Survey Anonima SIEC ] con sfondo #E0F2FE e testo #0369A1.
 
@@ -28,4 +28,4 @@ Tutti i componenti UI della survey devono riflettere fedelmente il design system
      * Primario: Sfondo #002C5F con effetto hover #00A3E0, angoli rounded-lg (8px), testo bold bianco.
 
 4. FOOTER:
-   - Inserire il footer ufficiale con il riferimento a SIEC: "© SIEC — Systems Integrators Educational Community | sieconline.it"
+   - Inserire il footer ufficiale con il riferimento a SIEC: "© SIEC — System Integration Experience Community | sieconline.it"
